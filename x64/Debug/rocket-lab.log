@@ -1,8 +1,0 @@
-﻿  main.cpp
-D:\Code\rocket-lab\lib\bx\macros.h(240,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Code\rocket-lab\lib\bx\macros.h(248,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Code\rocket-lab\lib\bx\macros.h(256,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Code\rocket-lab\lib\bx\macros.h(264,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Code\rocket-lab\lib\bx\macros.h(272,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Code\rocket-lab\lib\bx\macros.h(280,6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  rocket-lab.vcxproj -> D:\Code\rocket-lab\x64\Debug\rocket-lab.exe
