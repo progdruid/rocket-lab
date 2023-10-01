@@ -2,6 +2,4 @@
 
 #include "bgfx/bgfx.h"
 
-//namespace rocket_lab{
-	bgfx::ShaderHandle loadShader(const char* _name);
-//}
+bgfx::ShaderHandle createShaderFromFile(const char* filePath);
