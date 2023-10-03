@@ -35,7 +35,7 @@ bgfx::ShaderHandle createShaderFromFile(const char* filePath)
     file.close();
 
     // Create a BGFX memory reference from the shader source code
-    const bgfx::Memory* shaderMemory = bgfx::makeRef(shaderData.data(), static_cast<uint32_t>(fileSize));
+    const bgfx::Memory* shaderMemory = bgfx::copy(shaderData.data(), static_cast<uint32_t>(fileSize));
 
     // Create and return the shader handle
     return bgfx::createShader(shaderMemory);

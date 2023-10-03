@@ -56,32 +56,48 @@ int main()
 	bgfx::init(init);
 	bgfx::setViewRect(0, 0, 0, bgfx::BackbufferRatio::Equal);
 
-	SpriteVertex spriteVertices[6] =
+
+	//create vertices
+	SpriteVertex spriteVertices[4] =
 	{
 		{-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f}, // White quad
 		{0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f},
 		{0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f},
-		{0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f},
-		{-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f},
-		{-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f}
+		{-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f}
 	};
 
+	const uint16_t vertexIndices[6] = { 0, 1, 2, 0, 2, 3 };
+
+
+	//create layout
 	bgfx::VertexLayout layout;
 	layout.begin(bgfx::RendererType::Direct3D12)
 		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
 		.add(bgfx::Attrib::Color0, 3, bgfx::AttribType::Float)
 		.end();
 
-	bgfx::VertexBufferHandle vertexBuffer = bgfx::createVertexBuffer(
-		bgfx::makeRef(spriteVertices, sizeof(spriteVertices)),
+
+	//create buffers
+	bgfx::DynamicVertexBufferHandle vertexBuffer = bgfx::createDynamicVertexBuffer(
+		bgfx::makeRef(spriteVertices, sizeof(spriteVertices)), 
 		layout);
 
+	bgfx::IndexBufferHandle indexBuffer = bgfx::createIndexBuffer(
+		bgfx::copy(vertexIndices, sizeof(vertexIndices)));
+
+
+	//load shaders
 	bgfx::ShaderHandle vertexShader = createShaderFromFile("shaders/vertexShader.bin");
 	bgfx::ShaderHandle fragmentShader = createShaderFromFile("shaders/fragmentShader.bin");
 
-	std::cout << bgfx::isValid(vertexBuffer) << std::endl;
-	std::cout << bgfx::isValid(vertexShader) << " " << bgfx::isValid(fragmentShader) << std::endl;
 
+	//print some debug info
+	std::cout << "VertexBuffer: " << bgfx::isValid(vertexBuffer) << std::endl;
+	std::cout << "IndexBuffer: " << bgfx::isValid(indexBuffer) << std::endl;
+	std::cout << "Shaders: " << bgfx::isValid(vertexShader) << " " << bgfx::isValid(fragmentShader) << std::endl;
+
+
+	//createa program
 	bgfx::ProgramHandle program = bgfx::createProgram(vertexShader, fragmentShader, true);
 
 
@@ -95,10 +111,16 @@ int main()
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x1e2952ff, 1.0f, 0);
 		bgfx::setState(BGFX_STATE_DEFAULT);
 
+		bgfx::update(vertexBuffer, 0, bgfx::makeRef(spriteVertices, sizeof(spriteVertices)));
 		bgfx::setVertexBuffer(0, vertexBuffer);
+		bgfx::setIndexBuffer(indexBuffer);
+
 		bgfx::submit(0, program, 1.0, BGFX_DISCARD_NONE);
-		//bgfx::touch(0);
+		bgfx::touch(0);
 		bgfx::frame();
+		
+		//some fun
+		spriteVertices[0].x -= 0.0001f;
 	}
 
 
