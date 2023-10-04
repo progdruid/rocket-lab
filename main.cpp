@@ -18,6 +18,7 @@
 #include "glfw/glfw3.h"
 #include "glfw/glfw3native.h"
 
+#include "stb_image.h"
 #include "utils.h"
 
 const float PI = 3.14159f;
