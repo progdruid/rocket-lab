@@ -1,8 +1,10 @@
 #define LAB_WIDTH 800
-#define LAB_HEIGHT 600
+#define LAB_HEIGHT 800
+#define OSCILLATION_RAD 0.2f
 
 #include <iostream>
 #include <cstring>
+#include <chrono>
 
 #define _ITERATOR_DEBUG_LEVEL 0
 #define BX_CONFIG_DEBUG 0;
@@ -17,6 +19,8 @@
 #include "glfw/glfw3native.h"
 
 #include "utils.h"
+
+const float PI = 3.14159f;
 
 struct SpriteVertex
 {
@@ -101,6 +105,7 @@ int main()
 	bgfx::ProgramHandle program = bgfx::createProgram(vertexShader, fragmentShader, true);
 
 
+	const auto startTime = std::chrono::high_resolution_clock::now();
 	//main loop
 	int windowWidth, windowHeight;
 	while (!glfwWindowShouldClose(window))
@@ -120,7 +125,17 @@ int main()
 		bgfx::frame();
 		
 		//some fun
-		spriteVertices[0].x -= 0.0001f;
+		const auto timePassed = std::chrono::high_resolution_clock::now() - startTime;
+		const float t = std::chrono::duration_cast<std::chrono::milliseconds>(timePassed).count() / 1000.0f;
+		
+		spriteVertices[0].x = -0.5f + OSCILLATION_RAD * cos(t);
+		spriteVertices[0].y = -0.5f + OSCILLATION_RAD * sin(t);
+		spriteVertices[1].x = +0.5f + OSCILLATION_RAD * cos(t + PI/2.0f);
+		spriteVertices[1].y = -0.5f + OSCILLATION_RAD * sin(t + PI/2.0f);
+		spriteVertices[2].x = +0.5f + OSCILLATION_RAD * cos(t + PI);
+		spriteVertices[2].y = +0.5f + OSCILLATION_RAD * sin(t + PI);
+		spriteVertices[3].x = -0.5f + OSCILLATION_RAD * cos(t + PI * 3 / 2.0f);
+		spriteVertices[3].y = +0.5f + OSCILLATION_RAD * sin(t + PI * 3 / 2.0f);
 	}
 
 
