@@ -1,0 +1,5 @@
+vertex:
+../../Libraries/bgfx/.build/win64_vs2019/bin/shadercRelease -f vertexShader.sc -o vertexShader.bin --platform windows --type vertex -i ../../Libraries/bgfx/src/ -p s_5_0
+
+fragment:
+../../Libraries/bgfx/.build/win64_vs2019/bin/shadercRelease -f fragmentShader.sc -o fragmentShader.bin --platform windows --type fragment -i ../../Libraries/bgfx/src/ -p s_5_0

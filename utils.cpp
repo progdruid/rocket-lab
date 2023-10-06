@@ -46,11 +46,11 @@ bgfx::ShaderHandle createShaderFromFile(const char* filePath)
 bgfx::TextureHandle loadTexture(const char* filePath)
 {
     int width, height, numChannels;
-    stbi_uc* textureRaw = stbi_load(filePath, &width, &height, &numChannels, 3);
+    stbi_uc* textureRaw = stbi_load(filePath, &width, &height, &numChannels, STBI_rgb_alpha);
     
-    const bgfx::Memory* textureMem = bgfx::makeRef(textureRaw, width * height * 3);
-    bgfx::TextureHandle texture = bgfx::createTexture2D(width, height, false, 1, bgfx::TextureFormat::RGB8U, 0, textureMem);
-    std::cout << "Texture: " << bgfx::isValid(texture) << std::endl;
+    const bgfx::Memory* textureMem = bgfx::copy(textureRaw, width * height * STBI_rgb_alpha);
+    bgfx::TextureHandle texture = bgfx::createTexture2D(width, height, false, 1, bgfx::TextureFormat::RGBA8, 0, textureMem);
+    
     stbi_image_free(textureRaw);
     return texture;
 }
