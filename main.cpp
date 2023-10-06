@@ -74,6 +74,8 @@ int main()
 	const uint16_t vertexIndices[6] = { 0, 1, 2, 0, 2, 3 };
 
 
+	bgfx::TextureHandle taxture = loadTexture("res/rocket.png");
+
 	//create layout
 	bgfx::VertexLayout layout;
 	layout.begin(bgfx::RendererType::Direct3D12)
@@ -107,6 +109,7 @@ int main()
 
 
 	const auto startTime = std::chrono::high_resolution_clock::now();
+
 	//main loop
 	int windowWidth, windowHeight;
 	while (!glfwWindowShouldClose(window))

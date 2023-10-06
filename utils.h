@@ -5,3 +5,4 @@
 #include "stb_image.h"
 
 bgfx::ShaderHandle createShaderFromFile(const char* filePath);
+bgfx::TextureHandle loadTexture(const char* filePath);

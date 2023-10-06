@@ -9,6 +9,8 @@
 #include "bimg/bimg.h"
 #include "bgfx/bgfx.h"
 
+#include "stb_image.h"
+
 bgfx::ShaderHandle createShaderFromFile(const char* filePath)
 {
     // Open the shader file
@@ -39,4 +41,16 @@ bgfx::ShaderHandle createShaderFromFile(const char* filePath)
 
     // Create and return the shader handle
     return bgfx::createShader(shaderMemory);
+}
+
+bgfx::TextureHandle loadTexture(const char* filePath)
+{
+    int width, height, numChannels;
+    stbi_uc* textureRaw = stbi_load(filePath, &width, &height, &numChannels, 3);
+    
+    const bgfx::Memory* textureMem = bgfx::makeRef(textureRaw, width * height * 3);
+    bgfx::TextureHandle texture = bgfx::createTexture2D(width, height, false, 1, bgfx::TextureFormat::RGB8U, 0, textureMem);
+    std::cout << "Texture: " << bgfx::isValid(texture) << std::endl;
+    stbi_image_free(textureRaw);
+    return texture;
 }
