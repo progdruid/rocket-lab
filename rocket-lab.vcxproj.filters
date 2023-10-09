@@ -28,6 +28,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>3: Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>3: Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

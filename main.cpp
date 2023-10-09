@@ -1,6 +1,9 @@
 #define LAB_WIDTH 800
 #define LAB_HEIGHT 800
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 #define _ITERATOR_DEBUG_LEVEL 0
 #define BX_CONFIG_DEBUG 0;
 #include "bx/bx.h"
@@ -46,7 +49,7 @@ int run()
 	bgfx::init(init);
 	bgfx::setViewRect(0, 0, 0, bgfx::BackbufferRatio::Equal);
 
-	rocket_lab::Game* game = new rocket_lab::Game();
+	rocket_lab::Game* game = new rocket_lab::Game(LAB_WIDTH, LAB_HEIGHT);
 
 	int windowWidth, windowHeight;
 	while (!glfwWindowShouldClose(window))

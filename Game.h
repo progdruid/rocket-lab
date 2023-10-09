@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "Sprite.h"
 
 namespace rocket_lab
@@ -7,7 +8,7 @@ namespace rocket_lab
 	class Game 
 	{
 	public:
-		Game();
+		Game(short _windowWidth, short _windowHeight);
 		~Game();
 
 		int update();
@@ -26,16 +27,9 @@ namespace rocket_lab
 		bgfx::DynamicVertexBufferHandle vertexBuffer;
 		bgfx::IndexBufferHandle indexBuffer;
 
-		bgfx::TextureHandle texture;
-		bgfx::UniformHandle textureUniform;
-
-		Sprite::SpriteVertex spriteVertices[4] = {
-			{-0.5f, -0.5f, 0.0f, 1.0f}, // sprite
-			{0.5f, -0.5f, 1.0f, 1.0f},
-			{0.5f, 0.5f, 1.0f, 0.0f},
-			{-0.5f, 0.5f, 0.0f, 0.0f}
-		};
-		const uint16_t vertexIndices[6] = { 0, 1, 2, 0, 2, 3 };
+		Sprite* rocket;
+		
+		std::vector<uint16_t> indexVector;
 	};
 
 	int run();
