@@ -138,11 +138,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\rocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shaders\commands.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShader.bin" />
+    <None Include="shaders\fragmentShader.sc" />
+    <None Include="shaders\varying.def.sc" />
+    <None Include="shaders\vertexShader.bin" />
+    <None Include="shaders\vertexShader.sc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
