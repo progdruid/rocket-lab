@@ -68,7 +68,7 @@ namespace rocket_lab
 
 		const auto now = std::chrono::high_resolution_clock::now();
 		const auto timePassed = now - lastTick;
-		const float dt = std::chrono::duration_cast<std::chrono::milliseconds>(timePassed).count() / 1000.0f;
+		const double dt = std::chrono::duration_cast<std::chrono::milliseconds>(timePassed).count() / 1000.0;
 		lastTick = now;
 		rocketBody->runPhysics(dt);
 		rocketSprite->setTextureToRender(0);
@@ -89,5 +89,11 @@ namespace rocket_lab
 	{
 		windowWidth = _windowWidth;
 		windowHeight = _windowHeight;
+	}
+
+	void Game::handleDrag(short dragX, short dragY)
+	{
+		rocketBody->addVelocity(dragX, dragY);
+		std::cout << dragX << " " << dragY << std::endl;
 	}
 }

@@ -28,7 +28,7 @@ namespace rocket_lab {
 		delete fieldHeight;
 	}
 
-	void Rigidbody::runPhysics(float dt) 
+	void Rigidbody::runPhysics(double dt) 
 	{
 		float totalAccX = accX, totalAccY = accY;
 

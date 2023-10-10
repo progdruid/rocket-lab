@@ -48,8 +48,7 @@ namespace rocket_lab {
 		vertices[1] = { (x + cosVal + sinVal)*2/(float)*windowWidth, (y + sinVal - cosVal)*2/(float)*windowHeight, vertices[1].u, vertices[1].v};
 		vertices[2] = { (x + cosVal - sinVal)*2/(float)*windowWidth, (y + sinVal + cosVal)*2/(float)*windowHeight, vertices[2].u, vertices[2].v};
 		vertices[3] = { (x - cosVal - sinVal)*2/(float)*windowWidth, (y - sinVal + cosVal)*2/(float)*windowHeight, vertices[3].u, vertices[3].v};
-
-		std::cout << vertices[0].x * vertices[1].x + vertices[0].y * vertices[1].y << std::endl;
+		
 	}
 
 	std::vector<uint16_t> Sprite::generateIndexVector(const int numSprites)

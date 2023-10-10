@@ -12,9 +12,10 @@ namespace rocket_lab {
 
 		void toggleGravity(bool value) { gravityEnabled = value; };
 		void setVelocity(float _velX, float _velY) { velX = _velX; velY = _velY; };
+		void addVelocity(float _dvelX, float _dvelY) { velX += _dvelX; velY += _dvelY; }
 		void setAcceleration(float _accX, float _accY) { accX = _accX; accY = _accY; };
 
-		void runPhysics(float dt);
+		void runPhysics(double dt);
 
 	private:
 		Sprite* sprite;
@@ -27,7 +28,7 @@ namespace rocket_lab {
 		float x, y;
 
 		bool gravityEnabled = true;
-		const float gravity = 9.8f * 20;
-		const float airResRate = 0.02f; //%
+		const float gravity = 9.8f * 80;
+		const float airResRate = 0.1f; //%
 	};
 }

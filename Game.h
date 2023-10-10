@@ -4,18 +4,20 @@
 #include <vector>
 #include "Sprite.h"
 #include "Rigidbody.h"
+#include "DragListener.h"
 
 namespace rocket_lab
 {
-	class Game 
+	class Game : public DragListener
 	{
 	public:
 		Game(short _windowWidth, short _windowHeight);
 		~Game();
-
+		
 		int update();
 		
 		void updateWindowSizeInfo(short _windowWidth, short _windowHeight);
+		void handleDrag(short dragX, short dragY);
 
 	private:
 		short windowWidth, windowHeight;
@@ -36,6 +38,4 @@ namespace rocket_lab
 
 		std::chrono::steady_clock::time_point lastTick;
 	};
-
-	int run();
 }

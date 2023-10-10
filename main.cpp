@@ -17,6 +17,7 @@
 #include "glfw/glfw3native.h"
 
 #include "Game.h"
+#include "InputHandler.h"
 
 int run()
 {
@@ -49,7 +50,9 @@ int run()
 	bgfx::init(init);
 	bgfx::setViewRect(0, 0, 0, bgfx::BackbufferRatio::Equal);
 
+	rocket_lab::InputHandler* inputHandler = new rocket_lab::InputHandler(window);
 	rocket_lab::Game* game = new rocket_lab::Game(LAB_WIDTH, LAB_HEIGHT);
+	inputHandler->subscribeDragListener(game);
 
 	int windowWidth, windowHeight;
 	while (!glfwWindowShouldClose(window))
@@ -62,7 +65,9 @@ int run()
 		game->update();
 	}
 
+	inputHandler->unsubscribeDragListener(game);
 	delete game;
+	delete inputHandler;
 	bgfx::shutdown();
 	glfwTerminate();
 
