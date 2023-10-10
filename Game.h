@@ -1,7 +1,9 @@
 #pragma once
 
+#include <chrono>
 #include <vector>
 #include "Sprite.h"
+#include "Rigidbody.h"
 
 namespace rocket_lab
 {
@@ -27,9 +29,12 @@ namespace rocket_lab
 		bgfx::DynamicVertexBufferHandle vertexBuffer;
 		bgfx::IndexBufferHandle indexBuffer;
 
-		Sprite* rocket;
+		Sprite* rocketSprite;
+		Rigidbody* rocketBody;
 		
 		std::vector<uint16_t> indexVector;
+
+		std::chrono::steady_clock::time_point lastTick;
 	};
 
 	int run();

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <chrono>
 #include "bgfx/bgfx.h"
 #include "utils.h"
 #include "Game.h"
@@ -18,11 +18,14 @@ namespace rocket_lab
 			.add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float)
 			.end();
 
-		rocket = new Sprite((char*)("res/rocket.png"), (char*)("s_texture"), 100, &windowWidth, &windowHeight);
-		rocket->setAngle(1.5f);
+
+		rocketSprite = new Sprite((char*)("res/rocket.png"), (char*)("s_texture"), 50, &windowWidth, &windowHeight);
+		rocketSprite->setPos(-200, 0);
+		rocketBody = new Rigidbody(rocketSprite, 40.0f, &windowWidth, &windowHeight);
+		rocketBody->setVelocity(150, 120);
 		
 		//create buffers
-		std::vector<Sprite::SpriteVertex> vertexVector = rocket->getMappedVertices();
+		std::vector<Sprite::SpriteVertex> vertexVector = rocketSprite->getMappedVertices();
 		vertexBuffer = bgfx::createDynamicVertexBuffer(
 			bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)),
 			layout);
@@ -30,6 +33,7 @@ namespace rocket_lab
 		indexVector = Sprite::generateIndexVector(1);
 		indexBuffer = bgfx::createIndexBuffer(
 			bgfx::copy(indexVector.data(), indexVector.size() * sizeof(uint16_t)));
+
 
 
 		//load shaders
@@ -43,12 +47,15 @@ namespace rocket_lab
 
 		//create a program
 		program = bgfx::createProgram(vertexShader, fragmentShader, true);
+
+		lastTick = std::chrono::high_resolution_clock::now();
 	}
 
 	Game::~Game() 
 	{
-		//bgfx::destroy(texture);
-		//bgfx::destroy(textureUniform);
+		delete rocketBody;
+		delete rocketSprite;
+
 		bgfx::destroy(vertexBuffer);
 		bgfx::destroy(indexBuffer);
 		bgfx::destroy(program);
@@ -59,9 +66,14 @@ namespace rocket_lab
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x1e2952ff, 1.0f, 0);
 		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
-		rocket->setTextureToRender(0);
+		const auto now = std::chrono::high_resolution_clock::now();
+		const auto timePassed = now - lastTick;
+		const float dt = std::chrono::duration_cast<std::chrono::milliseconds>(timePassed).count() / 1000.0f;
+		lastTick = now;
+		rocketBody->runPhysics(dt);
+		rocketSprite->setTextureToRender(0);
 
-		auto vertexVector = rocket->getMappedVertices();
+		auto vertexVector = rocketSprite->getMappedVertices();
 		bgfx::update(vertexBuffer, 0, bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)));
 		bgfx::setVertexBuffer(0, vertexBuffer);
 		bgfx::setIndexBuffer(indexBuffer);

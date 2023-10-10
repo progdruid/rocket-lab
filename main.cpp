@@ -1,4 +1,4 @@
-#define LAB_WIDTH 800
+#define LAB_WIDTH 1200
 #define LAB_HEIGHT 800
 
 #define STB_IMAGE_IMPLEMENTATION

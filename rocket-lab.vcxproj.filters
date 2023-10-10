@@ -31,6 +31,9 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>3: Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>3: Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -40,6 +43,9 @@
       <Filter>2: Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
+      <Filter>2: Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
       <Filter>2: Header Files</Filter>
     </ClInclude>
   </ItemGroup>
