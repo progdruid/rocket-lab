@@ -1,5 +1,7 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <vector>
 #include "bgfx/bgfx.h"
 #include "Sprite.h"
@@ -38,11 +40,15 @@ void Sprite::updateVertices()
 	float _x = x * 2 / (float)*windowWidth;
 	float _y = y * 2 / (float)*windowHeight;
 	
+	float sinVal = sin(angle);
+	float cosVal = cos(angle);
+
+
 	//add angle calculations
-	vertices[0] = { _x - halfWidth, _y - halfHeight, vertices[0].u, vertices[0].v };
-	vertices[1] = { _x + halfWidth, _y - halfHeight, vertices[1].u, vertices[1].v };
-	vertices[2] = { _x + halfWidth, _y + halfHeight, vertices[2].u, vertices[2].v };
-	vertices[3] = { _x - halfWidth, _y + halfHeight, vertices[3].u, vertices[3].v };
+	vertices[0] = { _x - halfWidth * cosVal + halfHeight * sinVal, _y - halfWidth * sinVal - halfHeight * cosVal, vertices[0].u, vertices[0].v };
+	vertices[1] = { _x + halfWidth * cosVal + halfHeight * sinVal, _y + halfWidth * sinVal - halfHeight * cosVal, vertices[1].u, vertices[1].v };
+	vertices[2] = { _x + halfWidth * cosVal - halfHeight * sinVal, _y + halfWidth * sinVal + halfHeight * cosVal, vertices[2].u, vertices[2].v };
+	vertices[3] = { _x - halfWidth * cosVal - halfHeight * sinVal, _y - halfWidth * sinVal + halfHeight * cosVal, vertices[3].u, vertices[3].v };
 }
 
 std::vector<uint16_t> Sprite::generateIndexVector(const int numSprites)

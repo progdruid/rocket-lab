@@ -19,7 +19,7 @@ namespace rocket_lab
 			.end();
 
 		rocket = new Sprite((char*)("res/rocket.png"), (char*)("s_texture"), 100, &windowWidth, &windowHeight);
-		
+		rocket->setAngle(1.5f);
 		
 		//create buffers
 		std::vector<Sprite::SpriteVertex> vertexVector = rocket->getMappedVertices();
