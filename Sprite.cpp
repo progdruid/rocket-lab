@@ -32,8 +32,8 @@ namespace rocket_lab {
 
 	Sprite::~Sprite()
 	{
-		delete windowWidth;
-		delete windowHeight;
+		//delete windowWidth;
+		//delete windowHeight;
 		bgfx::destroy(texture);
 		bgfx::destroy(uniform);
 	}

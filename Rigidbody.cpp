@@ -24,8 +24,8 @@ namespace rocket_lab {
 
 	Rigidbody::~Rigidbody() 
 	{
-		delete fieldWidth;
-		delete fieldHeight;
+		//delete fieldWidth;
+		//delete fieldHeight;
 	}
 
 	void Rigidbody::runPhysics(double dt) 

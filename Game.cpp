@@ -63,7 +63,7 @@ namespace rocket_lab
 
 	int Game::update()
 	{
-		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x1e2952ff, 1.0f, 0);
+		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x121619ff, 1.0f, 0);
 		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
 		const auto now = std::chrono::high_resolution_clock::now();
