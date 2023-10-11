@@ -1,5 +1,6 @@
 #pragma once
 
+#include <time.h>
 #include <vector>
 #include "Sprite.h"
 #include "Rigidbody.h"
@@ -34,5 +35,7 @@ namespace rocket_lab
 		Rigidbody* rocketBody;
 		
 		std::vector<uint16_t> indexVector;
+		
+		clock_t lastUpdateTime;
 	};
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 #include "bgfx/bgfx.h"
 #include "utils.h"
 #include "Game.h"
@@ -42,9 +43,11 @@ namespace rocket_lab
 		std::cout << "VertexBuffer: " << bgfx::isValid(vertexBuffer) << std::endl;
 		std::cout << "IndexBuffer: " << bgfx::isValid(indexBuffer) << std::endl;
 		std::cout << "Shaders: " << bgfx::isValid(vertexShader) << " " << bgfx::isValid(fragmentShader) << std::endl;
-
+		
 		//create a program
 		program = bgfx::createProgram(vertexShader, fragmentShader, true);
+
+		lastUpdateTime = clock();
 	}
 
 	Game::~Game() 
@@ -62,7 +65,9 @@ namespace rocket_lab
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x121619ff, 1.0f, 0);
 		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
-		rocketBody->runPhysics(0.001);
+		clock_t now = clock();
+		rocketBody->runPhysics((double)(now - lastUpdateTime)/CLOCKS_PER_SEC);
+		lastUpdateTime = now;
 		rocketSprite->setTextureToRender(0);
 
 		auto vertexVector = rocketSprite->getMappedVertices();
