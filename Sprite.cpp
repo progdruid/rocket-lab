@@ -51,7 +51,7 @@ namespace rocket_lab {
 		
 	}
 
-	std::vector<uint16_t> Sprite::generateIndexVector(const int numSprites)
+	std::vector<uint16_t> Sprite::generateIndexVector(const size_t numSprites)
 	{
 		std::vector<uint16_t> indices;
 		indices.resize(numSprites * 6);

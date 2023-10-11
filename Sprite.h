@@ -16,7 +16,7 @@ namespace rocket_lab {
 			float u, v;
 		};
 
-		static std::vector<uint16_t> generateIndexVector(int numSprites);
+		static std::vector<uint16_t> generateIndexVector(const size_t numSprites);
 
 		Sprite(char* _texturePath, char* _uniformName, short _size, short* _windowWidth, short* _windowHeight);
 		~Sprite();

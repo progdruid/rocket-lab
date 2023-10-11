@@ -1,5 +1,4 @@
 #include <iostream>
-#include <chrono>
 #include "bgfx/bgfx.h"
 #include "utils.h"
 #include "Game.h"
@@ -35,7 +34,6 @@ namespace rocket_lab
 			bgfx::copy(indexVector.data(), indexVector.size() * sizeof(uint16_t)));
 
 
-
 		//load shaders
 		vertexShader = createShaderFromFile("shaders/vertexShader.bin");
 		fragmentShader = createShaderFromFile("shaders/fragmentShader.bin");
@@ -47,8 +45,6 @@ namespace rocket_lab
 
 		//create a program
 		program = bgfx::createProgram(vertexShader, fragmentShader, true);
-
-		lastTick = std::chrono::high_resolution_clock::now();
 	}
 
 	Game::~Game() 
@@ -66,11 +62,7 @@ namespace rocket_lab
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x121619ff, 1.0f, 0);
 		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
-		const auto now = std::chrono::high_resolution_clock::now();
-		const auto timePassed = now - lastTick;
-		const double dt = std::chrono::duration_cast<std::chrono::milliseconds>(timePassed).count() / 1000.0;
-		lastTick = now;
-		rocketBody->runPhysics(dt);
+		rocketBody->runPhysics(0.001);
 		rocketSprite->setTextureToRender(0);
 
 		auto vertexVector = rocketSprite->getMappedVertices();
