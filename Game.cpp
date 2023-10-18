@@ -14,11 +14,16 @@ namespace rocket_lab
 
 		textureRenderer = new TextureRenderer("res/rocket.png", "s_texture");
 
-		rocketSprite = new Sprite(50, &windowWidth, &windowHeight);
-		rocketSprite->setAnchors(0.0f, 1.0f, 1.0f, 0.0f);
-		rocketSprite->setPos(-200, 0);
-		rocketBody = new Rigidbody(rocketSprite, 40.0f, &windowWidth, &windowHeight);
-		rocketBody->setVelocity(150, 120);
+		rocketSprites[0] = new Sprite(50, &windowWidth, &windowHeight);
+		rocketSprites[1] = new Sprite(50, &windowWidth, &windowHeight);
+		rocketSprites[0]->setAnchors(0.0f, 1.0f, 1.0f, 0.0f);
+		rocketSprites[1]->setAnchors(0.0f, 1.0f, 1.0f, 0.0f);
+		rocketSprites[0]->setPos(-200, 0);
+		rocketSprites[1]->setPos(-300, 100);
+		rocketBodies[0] = new Rigidbody(rocketSprites[0], 40.0f, &windowWidth, &windowHeight);
+		rocketBodies[1] = new Rigidbody(rocketSprites[1], 40.0f, &windowWidth, &windowHeight);
+		rocketBodies[0]->setVelocity(150, 120);
+		rocketBodies[1]->setVelocity(-150, 120);
 
 		//create layout
 		layout.begin(bgfx::RendererType::Direct3D12)
@@ -27,12 +32,13 @@ namespace rocket_lab
 			.end();
 		
 		//create buffers
-		rocketSprite->appendVerticesToVector(vertexVector);
+		rocketSprites[0]->appendVerticesToVector(vertexVector);
+		rocketSprites[1]->appendVerticesToVector(vertexVector);
 		vertexBuffer = bgfx::createDynamicVertexBuffer(
 			bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)),
 			layout);
 
-		indexVector = Sprite::generateIndexVector(1);
+		indexVector = Sprite::generateIndexVector(2);
 		indexBuffer = bgfx::createIndexBuffer(
 			bgfx::copy(indexVector.data(), indexVector.size() * sizeof(uint16_t)));
 
@@ -54,8 +60,10 @@ namespace rocket_lab
 
 	Game::~Game() 
 	{
-		delete rocketBody;
-		delete rocketSprite;
+		delete rocketBodies[0];
+		delete rocketBodies[1];
+		delete rocketSprites[0];
+		delete rocketSprites[1];
 		delete textureRenderer;
 
 		bgfx::destroy(vertexBuffer);
@@ -69,12 +77,14 @@ namespace rocket_lab
 		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
 		clock_t now = clock();
-		rocketBody->runPhysics((double)(now - lastUpdateTime)/CLOCKS_PER_SEC);
+		rocketBodies[0]->runPhysics((double)(now - lastUpdateTime) / CLOCKS_PER_SEC);
+		rocketBodies[1]->runPhysics((double)(now - lastUpdateTime) / CLOCKS_PER_SEC);
 		lastUpdateTime = now;
 		textureRenderer->setToRender(0);
 
 		vertexVector.clear();
-		rocketSprite->appendVerticesToVector(vertexVector);
+		rocketSprites[0]->appendVerticesToVector(vertexVector);
+		rocketSprites[1]->appendVerticesToVector(vertexVector);
 		bgfx::update(vertexBuffer, 0, bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)));
 		bgfx::setVertexBuffer(0, vertexBuffer);
 		bgfx::setIndexBuffer(indexBuffer);
@@ -94,7 +104,8 @@ namespace rocket_lab
 
 	void Game::handleDrag(short dragX, short dragY)
 	{
-		rocketBody->addVelocity(dragX, dragY);
+		rocketBodies[0]->addVelocity(dragX, dragY);
+		rocketBodies[1]->addVelocity(dragX, dragY);
 		std::cout << dragX << " " << dragY << std::endl;
 	}
 }

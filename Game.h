@@ -33,8 +33,8 @@ namespace rocket_lab
 		bgfx::IndexBufferHandle indexBuffer;
 
 		TextureRenderer* textureRenderer;
-		Sprite* rocketSprite;
-		Rigidbody* rocketBody;
+		Sprite* rocketSprites[2];
+		Rigidbody* rocketBodies[2];
 		
 		std::vector<Sprite::SpriteVertex> vertexVector;
 		std::vector<uint16_t> indexVector;
