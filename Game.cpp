@@ -12,17 +12,18 @@ namespace rocket_lab
 		windowWidth = _windowWidth;
 		windowHeight = _windowHeight;
 
+		textureRenderer = new TextureRenderer("res/rocket.png", "s_texture");
+
+		rocketSprite = new Sprite(50, &windowWidth, &windowHeight);
+		rocketSprite->setPos(-200, 0);
+		rocketBody = new Rigidbody(rocketSprite, 40.0f, &windowWidth, &windowHeight);
+		rocketBody->setVelocity(150, 120);
+
 		//create layout
 		layout.begin(bgfx::RendererType::Direct3D12)
 			.add(bgfx::Attrib::Position, 2, bgfx::AttribType::Float)
 			.add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float)
 			.end();
-
-
-		rocketSprite = new Sprite((char*)("res/rocket.png"), (char*)("s_texture"), 50, &windowWidth, &windowHeight);
-		rocketSprite->setPos(-200, 0);
-		rocketBody = new Rigidbody(rocketSprite, 40.0f, &windowWidth, &windowHeight);
-		rocketBody->setVelocity(150, 120);
 		
 		//create buffers
 		std::vector<Sprite::SpriteVertex> vertexVector = rocketSprite->getMappedVertices();
@@ -54,6 +55,7 @@ namespace rocket_lab
 	{
 		delete rocketBody;
 		delete rocketSprite;
+		delete textureRenderer;
 
 		bgfx::destroy(vertexBuffer);
 		bgfx::destroy(indexBuffer);
@@ -68,7 +70,8 @@ namespace rocket_lab
 		clock_t now = clock();
 		rocketBody->runPhysics((double)(now - lastUpdateTime)/CLOCKS_PER_SEC);
 		lastUpdateTime = now;
-		rocketSprite->setTextureToRender(0);
+		textureRenderer->setToRender(0);
+		//rocketSprite->setTextureToRender(0);
 
 		auto vertexVector = rocketSprite->getMappedVertices();
 		bgfx::update(vertexBuffer, 0, bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)));

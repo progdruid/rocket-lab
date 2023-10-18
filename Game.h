@@ -2,6 +2,7 @@
 
 #include <time.h>
 #include <vector>
+#include "TextureRenderer.h"
 #include "Sprite.h"
 #include "Rigidbody.h"
 #include "DragListener.h"
@@ -31,6 +32,7 @@ namespace rocket_lab
 		bgfx::DynamicVertexBufferHandle vertexBuffer;
 		bgfx::IndexBufferHandle indexBuffer;
 
+		TextureRenderer* textureRenderer;
 		Sprite* rocketSprite;
 		Rigidbody* rocketBody;
 		

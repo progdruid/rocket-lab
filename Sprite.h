@@ -18,7 +18,7 @@ namespace rocket_lab {
 
 		static std::vector<uint16_t> generateIndexVector(const size_t numSprites);
 
-		Sprite(char* _texturePath, char* _uniformName, short _size, short* _windowWidth, short* _windowHeight);
+		Sprite(short _size, short* _windowWidth, short* _windowHeight);
 		~Sprite();
 
 		short getX() { return x; };
@@ -30,7 +30,6 @@ namespace rocket_lab {
 		float getAngle() { return angle; };
 		void setAngle(float _angleInRad) { angle = _angleInRad; updateVertices(); };
 
-		void setTextureToRender(uint8_t stage, uint32_t flags = UINT32_MAX) { bgfx::setTexture(stage, uniform, texture, flags); }
 		std::vector<SpriteVertex> getMappedVertices() { return vertices; };
 
 	private:
@@ -41,9 +40,6 @@ namespace rocket_lab {
 		short* windowWidth, * windowHeight;
 
 		std::vector<SpriteVertex> vertices;
-
-		bgfx::TextureHandle texture;
-		bgfx::UniformHandle uniform;
 
 		void updateVertices();
 	};

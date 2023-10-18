@@ -143,6 +143,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TextureRenderer.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>

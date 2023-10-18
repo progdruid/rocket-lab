@@ -37,6 +37,9 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>3: Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>3: Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -55,6 +58,9 @@
       <Filter>2: Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DragListener.h">
+      <Filter>2: Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRenderer.h">
       <Filter>2: Header Files</Filter>
     </ClInclude>
   </ItemGroup>

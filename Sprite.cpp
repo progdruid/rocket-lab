@@ -10,13 +10,10 @@
 
 namespace rocket_lab {
 
-	Sprite::Sprite(char* _texturePath, char* _uniformName, short _size, short* _windowWidth, short* _windowHeight)
+	Sprite::Sprite(short _size, short* _windowWidth, short* _windowHeight)
 	{
 		windowWidth = _windowWidth;
 		windowHeight = _windowHeight;
-
-		texture = rocket_lab::loadTexture(_texturePath);
-		uniform = bgfx::createUniform(_uniformName, bgfx::UniformType::Sampler, 1);
 
 		size = _size;
 		x = 0; y = 0;
@@ -30,13 +27,7 @@ namespace rocket_lab {
 		updateVertices();
 	}
 
-	Sprite::~Sprite()
-	{
-		//delete windowWidth;
-		//delete windowHeight;
-		bgfx::destroy(texture);
-		bgfx::destroy(uniform);
-	}
+	Sprite::~Sprite() {}
 
 	void Sprite::updateVertices()
 	{
