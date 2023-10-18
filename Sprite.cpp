@@ -19,15 +19,19 @@ namespace rocket_lab {
 		x = 0; y = 0;
 		angle = 0.0f;
 
-		vertices.push_back({ -0.5f, -0.5f, 0.0f, 1.0f });
-		vertices.push_back({ 0.5f, -0.5f, 1.0f, 1.0f });
-		vertices.push_back({ 0.5f,  0.5f, 1.0f, 0.0f });
-		vertices.push_back({ -0.5f,  0.5f, 0.0f, 0.0f });
-
+		vertices.resize(4);
 		updateVertices();
 	}
 
 	Sprite::~Sprite() {}
+
+	void Sprite::setAnchors(float leftX, float rightX, float botY, float topY)
+	{
+		vertices[0].u = leftX; vertices[0].v = botY;
+		vertices[1].u = rightX; vertices[1].v = botY;
+		vertices[2].u = rightX; vertices[2].v = topY;
+		vertices[3].u = leftX; vertices[3].v = topY;
+	}
 
 	void Sprite::updateVertices()
 	{

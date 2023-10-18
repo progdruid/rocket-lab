@@ -30,6 +30,7 @@ namespace rocket_lab {
 		float getAngle() { return angle; };
 		void setAngle(float _angleInRad) { angle = _angleInRad; updateVertices(); };
 
+		void setAnchors(float leftX, float rightX, float botY, float topY);
 		std::vector<SpriteVertex> getMappedVertices() { return vertices; };
 
 	private:

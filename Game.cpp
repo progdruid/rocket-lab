@@ -15,6 +15,7 @@ namespace rocket_lab
 		textureRenderer = new TextureRenderer("res/rocket.png", "s_texture");
 
 		rocketSprite = new Sprite(50, &windowWidth, &windowHeight);
+		rocketSprite->setAnchors(0.0f, 1.0f, 1.0f, 0.0f);
 		rocketSprite->setPos(-200, 0);
 		rocketBody = new Rigidbody(rocketSprite, 40.0f, &windowWidth, &windowHeight);
 		rocketBody->setVelocity(150, 120);
