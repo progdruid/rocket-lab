@@ -46,6 +46,11 @@ namespace rocket_lab {
 		
 	}
 
+	void Sprite::appendVerticesToVector(std::vector<SpriteVertex>& _vector)
+	{
+		_vector.insert(_vector.end(), vertices.begin(), vertices.end());
+	}
+
 	std::vector<uint16_t> Sprite::generateIndexVector(const size_t numSprites)
 	{
 		std::vector<uint16_t> indices;

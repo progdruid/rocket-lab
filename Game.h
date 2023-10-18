@@ -36,6 +36,7 @@ namespace rocket_lab
 		Sprite* rocketSprite;
 		Rigidbody* rocketBody;
 		
+		std::vector<Sprite::SpriteVertex> vertexVector;
 		std::vector<uint16_t> indexVector;
 		
 		clock_t lastUpdateTime;

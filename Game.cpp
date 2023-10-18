@@ -27,7 +27,7 @@ namespace rocket_lab
 			.end();
 		
 		//create buffers
-		std::vector<Sprite::SpriteVertex> vertexVector = rocketSprite->getMappedVertices();
+		rocketSprite->appendVerticesToVector(vertexVector);
 		vertexBuffer = bgfx::createDynamicVertexBuffer(
 			bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)),
 			layout);
@@ -72,9 +72,9 @@ namespace rocket_lab
 		rocketBody->runPhysics((double)(now - lastUpdateTime)/CLOCKS_PER_SEC);
 		lastUpdateTime = now;
 		textureRenderer->setToRender(0);
-		//rocketSprite->setTextureToRender(0);
 
-		auto vertexVector = rocketSprite->getMappedVertices();
+		vertexVector.clear();
+		rocketSprite->appendVerticesToVector(vertexVector);
 		bgfx::update(vertexBuffer, 0, bgfx::copy(vertexVector.data(), vertexVector.size() * sizeof(Sprite::SpriteVertex)));
 		bgfx::setVertexBuffer(0, vertexBuffer);
 		bgfx::setIndexBuffer(indexBuffer);
