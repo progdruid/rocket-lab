@@ -8,6 +8,6 @@ This is an extremely simple "game" written in an own extremely simple engine.
 
 This project was made by me for Computer Games Technology BSc course at Abertay University on Year 1, Term 1.
 
-*Zakhar Kosovych <Progdruid> - 18.10.2023*
+*Zakhar Kosovych \<Progdruid\> - 18.10.2023*
 
 ![image](https://github.com/progdruid/rocket-lab/assets/45118425/59540175-c773-42a7-8c1b-557fbfd2eca3)
