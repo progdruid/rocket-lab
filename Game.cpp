@@ -74,8 +74,8 @@ namespace rocket_lab
 	int Game::update()
 	{
 		bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x121619ff, 1.0f, 0);
-		bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
-
+		bgfx::setState((BGFX_STATE_DEFAULT - BGFX_STATE_DEPTH_TEST_LESS) | BGFX_STATE_DEPTH_TEST_LEQUAL | BGFX_STATE_BLEND_ALPHA);
+		
 		clock_t now = clock();
 		rocketBodies[0]->runPhysics((double)(now - lastUpdateTime) / CLOCKS_PER_SEC);
 		rocketBodies[1]->runPhysics((double)(now - lastUpdateTime) / CLOCKS_PER_SEC);
